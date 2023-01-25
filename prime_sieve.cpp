@@ -1,8 +1,8 @@
 /*
  *  Multithreaded Prime Enumerator
  *
- *   Author: Ethan Woollet
- *   Date: Jan 2023 
+ *  Author: Ethan Woollet
+ *  Date: Jan 2023 
  * 
  *  Professor: Juan Parra
  *  Class: Parallel and Distributed Processing (COP4520)
