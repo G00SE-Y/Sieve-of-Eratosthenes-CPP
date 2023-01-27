@@ -10,7 +10,7 @@ To compile and run this program, download 'prime_sieve.cpp' or clone this repo.
 Then, navigate the the directory containing that file and perform the following commands
 
 - `g++ -o <executable name> prime_sieve.cpp`
-- `./<executable name> [> output.txt]`
+- `./<executable name> > primes.txt`
 
 
 # Notes On The Program
