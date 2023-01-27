@@ -11,6 +11,7 @@
 
 
 #include <iostream>
+#include <fstream>
 #include <cmath>
 #include <chrono>
 #include <mutex>
@@ -35,6 +36,7 @@ void print_assignment_output(int duration); // output for the assignment
 // global variables
 int THREAD_COUNT = 8; // number of threads spawned in threadpool
 const int MAX_VAL = 100000000; // max number to check for primeness
+ofstream outfile("primes.txt"); // output file
 
 
 // thread shared values
@@ -51,6 +53,8 @@ mutex mut_all_jobs_done;
 mutex mut_table;
 
 
+
+
 int main(void) {
 
     fill_table(); // fill table with 1's
@@ -64,6 +68,8 @@ int main(void) {
     // format output
     // print_prime_stats(duration.count());
     print_assignment_output(duration.count());
+
+    outfile.close();
 
     return 0;
 }
@@ -184,11 +190,11 @@ void print_top_primes() {
     }
 
     // formatting the output
-    cout << "[";
+    outfile << "[";
     for(int i = 0; i < 9; i++) {
-        cout << top_primes[i] << ", ";
+        outfile << top_primes[i] << ", ";
     }
-    cout << top_primes[9] << "]";
+    outfile << top_primes[9] << "]";
 
     return;
 }
@@ -197,13 +203,13 @@ void print_top_primes() {
 void print_time(int time) {
     
     if(time > 1000000) {
-        cout << (float) time / 1000000.0 << "s ";
+        outfile << (float) time / 1000000.0 << "s ";
     }
     else if(time > 1000) {
-        cout << (float) time / 1000.0 << "ms ";
+        outfile << (float) time / 1000.0 << "ms ";
     }
     else {
-        cout << time << "μs ";
+        outfile << time << "μs ";
     }
 
     return;
@@ -226,8 +232,8 @@ void print_assignment_output(int duration) {
 
     }
 
-    cout << count << " ";
-    cout << sum << " ";
+    outfile << count << " ";
+    outfile << sum << " ";
 
     print_top_primes();
 
@@ -241,7 +247,7 @@ void print_primes() {
     for(int i = 2; i <= MAX_VAL; i++) {
 
         if(table[i] == 1) { // print if not marked off (prime)
-            cout << i << " ";
+            outfile << i << " ";
         }
 
     }
@@ -252,11 +258,11 @@ void print_primes() {
 
 void print_prime_stats(int duration) {
 
-    cout << "\nAll done!\nElapsed Time: ";
+    outfile << "\nAll done!\nElapsed Time: ";
     print_time(duration); 
-    cout << "\n";
+    outfile << "\n";
 
-    cout << "\n10 largest primes: ";
+    outfile << "\n10 largest primes: ";
     print_top_primes();
 
     long long int sum = 0;
@@ -271,8 +277,8 @@ void print_prime_stats(int duration) {
 
     }
 
-    cout << "\nNumber of primes: " << count << "\n";
-    cout << "Sum of primes: " << sum << "\n\n";
+    outfile << "\nNumber of primes: " << count << "\n";
+    outfile << "Sum of primes: " << sum << "\n\n";
 
     return;
 }
